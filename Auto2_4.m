@@ -161,7 +161,7 @@ t1=waitbar(0,'正在生成图片') ;
        set(h,'position',[100,100,1300,800]);
        hold off
        grid on;
-       xlabel('Time/时间[s]','FontSize',ZIHAO_TU_YULAN)
+       xlabel('Zeit/时间[s]','FontSize',ZIHAO_TU_YULAN)
        ylabel('Kraft/力[N]','FontSize',ZIHAO_TU_YULAN)
        ylim([min(MIN_value{j})*1.1,20])
        set(gca,'FontSize',ZIHAO_TU_YULAN);
@@ -287,7 +287,7 @@ end
    
 %%%%%%%%%%%%%%%%%%%%%%%%安装力%%%%%%%%%%%%%
 else
-    t1=waitbar(0,'正在生成图片')  
+    t1=waitbar(0,'正在生成图片') ; 
 for j=1:length(MP)
        h=figure(j);
        set(h,'visible','off');
@@ -306,7 +306,7 @@ end
   set(h,'position',[100,100,1300,800]);
        hold off
        grid on;
-       xlabel('Time/时间[s]','FontSize',ZIHAO_TU_YULAN)
+       xlabel('Zeit/时间[s]','FontSize',ZIHAO_TU_YULAN)
        ylabel('Kraft/力[N]','FontSize',ZIHAO_TU_YULAN)
        set(gca,'FontSize',ZIHAO_TU_YULAN);
        sfilename=[Fileadress,filename{j},'Picture1' num2str(j) '.jpg'];
