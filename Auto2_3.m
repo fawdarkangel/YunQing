@@ -151,19 +151,19 @@ switch get(handles.popupmenu1,'value')
         else
             Filename=strcat(pathname,filename);
             [Type Sheet Format]=xlsfinfo(Filename)
-            if length(getappdata(0,'STAND_TITLE'))~=length(Sheet)-3
+            if length(getappdata(0,'STAND_TITLE'))~=length(Sheet)
                 msgbox('标题数量与数据数量不符，请检查数据或重新导入标题')
                 return
             end
             t1=waitbar(0,'正在读取数据');
-            for i=1:length(Sheet)-3
-                MK=xlsread(Filename,Sheet{i+3});
+            for i=1:length(Sheet)
+                MK=xlsread(Filename,Sheet{i});
                 MP{i}(:,1)=MK(:,DATA_TYPE_WEG);
                 MP{i}(:,2)=MK(:,DATA_TYPE_KRAFT);
-                waitbar(i/(length(Sheet)-3));
+                waitbar(i/(length(Sheet)));
             end
         end
-        set(handles.listbox1,'String',Sheet(4:end));
+        set(handles.listbox1,'String',Sheet(1:end));
     case 2                                                                             %高铁
         [filename,pathname,fileindex]=uigetfile('*.xls;*.xlsx;*.txt','选择数据','MultiSelect','on');
         if length(getappdata(0,'STAND_TITLE'))~=length(filename)

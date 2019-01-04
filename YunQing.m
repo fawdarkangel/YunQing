@@ -235,10 +235,6 @@ function Menu3_1_3_Callback(hObject, eventdata, handles)
 run Auto3_1_3
 
 
-% --------------------------------------------------------------------
-function Menu_Six_2_Callback(hObject, eventdata, handles)
-system('start https://kvssrv.faw-vw.com:8081/DE-script/webagent/DE/doku/report_req_doku.html?DEF_DD;');
-
 
 % --------------------------------------------------------------------
 function Untitled_3_Callback(hObject, eventdata, handles)

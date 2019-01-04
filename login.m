@@ -79,7 +79,7 @@ t1=waitbar(0,'正在初始化网络……');
 [status,cmdout]=dos('net group "domain admins" /domain'); %判断是否连接公司内网
 waitbar(0.1);
 if status==0
-    C=load('\\faw-vw\fs\org\PE\T-E-VC-2\07_测量组mearusing group\12-数据处理平台\login.mat');
+    C=load('\\faw-vw\fs\org\PE\T-E-VC-2-2\黄禹霆\12-数据处理平台\login.mat');
 elseif status==2
     msgbox('请连接公司内网');
     return;
@@ -112,7 +112,7 @@ close(t1);
         LOCAL_ADDRESS=java.net.InetAddress.getLocalHost;
         COMPUTER_IP=char(LOCAL_ADDRESS.getHostAddress);
         COMPUTER_NAME=char(LOCAL_ADDRESS.getHostName);
-       Fileaddress=[ '\\faw-vw\fs\org\PE\T-E-VC-2\07_测量组mearusing group\12-数据处理平台\login information.xlsx'];
+       Fileaddress=[ '\\faw-vw\fs\org\PE\T-E-VC-2-2\黄禹霆\12-数据处理平台\login information.xlsx'];
           [num text alldata]=xlsread(Fileaddress);
             SZ=size(alldata,1);%SZ为当前工作表行数
                        
