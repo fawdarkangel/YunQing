@@ -1,5 +1,6 @@
 function f=REPORTINFORMATION_OUTPUT(FAHRZEUGCODE,TEST_NAME)
- Fileaddress=[ '\\faw-vw\fs\org\PE\T-E-VC-2-2\黄禹霆\12-数据处理平台\report_information.xlsx'];
+ %Fileaddress=[ '\\faw-vw\fs\org\PE\T-E-VC-2-2\黄禹霆\12-数据处理平台\report_information.xlsx'];
+ Fileaddress=[ '\\Faw-vw\fs\org\PE\T-E-VC-2\07_测量组mearusing group\12-数据处理平台\report_information.xlsx'];
 [num text alldata]=xlsread(Fileaddress);
 SZ=size(alldata,1);%SZ为当前工作表行数
                        

@@ -27,7 +27,6 @@ guidata(hObject,handles);
 axes(handles.axes1);
 
 axis off
-
 handles.output = hObject;
 
 % Update handles structure
@@ -102,12 +101,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 handles=guihandles;
 guidata(hObject,handles);
-list=get(handles.popupmenu1,'String');
-val1=get(handles.popupmenu1,'Value');
 if isempty(get(handles.edit1,'String'))
     msgbox('请输入车型名称');
     return;
-end
+end 
+list=get(handles.popupmenu1,'String');
+val1=get(handles.popupmenu1,'Value');
 %%创建统计文件输出文件夹
 Fileaddress1=char('D:\Autorepoter\VWstossfaenger.xls');
   if ~exist('D:\Autorepoter','dir')
@@ -125,7 +124,7 @@ Fileaddress1=char('D:\Autorepoter\VWstossfaenger.xls');
     [num text alldata]=xlsread('D:\Autorepoter\VWstossfaenger.xls');
             SZ=size(alldata,1);%SZ为当前工作表行数
 
-   if get(handles.checkbox1,'Value')==1
+   if get(handles.checkbox2,'Value')==1
                 [filename,pathname,fileindex]=uigetfile('*.xls;*.xlsx','选择数据');
                 if isequal(filename,0)||isequal(pathname,0)||isequal(fileindex,0)
                     msgbox('导入文件失败');
@@ -133,9 +132,9 @@ Fileaddress1=char('D:\Autorepoter\VWstossfaenger.xls');
                     t1=waitbar(0,'正在读入数据');
                     Filename=strcat(pathname,filename);
                     [Type Sheet Format]=xlsfinfo(Filename) ;
-                    for i=1:length(Sheet)-3
-                        MP{i}=xlsread(Filename,char(Sheet{1,i+3}));
-                        waitbar(i/(length(Sheet)-3));
+                    for i=1:length(Sheet)
+                        MP{i}=xlsread(Filename,char(Sheet{1,i}));
+                        waitbar(i/(length(Sheet)));
                     end
                 end
    else
@@ -836,6 +835,13 @@ winopen(Lstfhinten)
 end
 waitbar(100);
 close(t2);
+%%%%%%%%%%%%输出报告生成信息到公共空间%%%%%%%%%%%%%%%
+FAHRZEUGCODE=get(handles.edit1,'String');
+TEST_NAME=['VW保险杠拉力试验 ',list{val1}];
+try
+REPORTINFORMATION_OUTPUT(FAHRZEUGCODE,TEST_NAME);
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 msgbox('报告生成完毕');
 
 % --- Executes on button press in checkbox1.
@@ -947,3 +953,26 @@ close(t2);
 
 % --- Executes on button press in checkbox2.
 function checkbox2_Callback(hObject, eventdata, handles)
+
+
+% --- Executes on selection change in Fahrzeugcode.
+function Fahrzeugcode_Callback(hObject, eventdata, handles)
+% hObject    handle to Fahrzeugcode (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns Fahrzeugcode contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from Fahrzeugcode
+
+
+% --- Executes during object creation, after setting all properties.
+function Fahrzeugcode_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Fahrzeugcode (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

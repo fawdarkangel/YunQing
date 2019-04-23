@@ -439,6 +439,7 @@ b2=get(handles.edit2,'String');
 b3=get(handles.edit3,'String');
 b4=get(handles.edit4,'String');
    val1=get(handles.popupmenu1,'Value');
+    val2=get(handles.popupmenu3,'Value');
    switch val1
        case 1
            b3='1';b4='1';
@@ -466,24 +467,60 @@ end
       mkdir(pathname,'result');
  end
  t1=waitbar(0,'正在读入数据');
- if ~iscell(filename)
-      Filename{1}=strcat(pathname,filename);
-         [Type Sheet Format]=xlsfinfo(Filename{1}) ;
-         sheet{1}=Sheet;
-         MP{1}=xlsread(Filename{1},char(sheet{1,1}(1,1)));
-         filename=1;
- else
- for i=1:length(filename)
-        Filename{i}=strcat(pathname,filename{i});
-         [Type Sheet Format]=xlsfinfo(Filename{i}) ;
-         sheet{i}=Sheet;
-         MP{i}=xlsread(Filename{i},char(sheet{1,i}(1,1)));
-         waitbar(i/length(filename));
-          try
-       system('taskkill/IM excel.exe');
-   end
+ switch val2
+     case 1
+         if ~iscell(filename)
+             Filename{1}=strcat(pathname,filename);
+             [Type Sheet Format]=xlsfinfo(Filename{1}) ;
+             sheet{1}=Sheet;
+             MP{1}=xlsread(Filename{1},char(sheet{1,1}(1,1)));
+             filename=1;
+         else
+             for i=1:length(filename)
+                 Filename{i}=strcat(pathname,filename{i});
+                 [Type Sheet Format]=xlsfinfo(Filename{i}) ;
+                 sheet{i}=Sheet;
+                 MP{i}=xlsread(Filename{i},char(sheet{1,i}(1,1)));
+                 waitbar(i/length(filename));
+                 try
+                     system('taskkill/IM excel.exe');
+                 end
+             end
+         end
+     case 2
+         if iscell(filename)
+             this_filename=filename;
+             fileindex=length(this_filename);
+         else
+             fileindex=1;
+             this_filename{1}=filename;
+         end
+         for i=1:fileindex
+             Filename{i}=strcat(pathname, this_filename{i});
+             fidin=fopen(Filename{i});                               % 打开test2.txt文件
+             fidout=fopen('result.txt','w');                       % 创建MKMATLAB.txt文件
+             while ~feof(fidin)                                      % 判断是否为文件末尾
+                 tline=fgetl(fidin);                                     % 从文件读行
+                 if isempty(tline)
+                     continue
+                 else
+                     if double(tline(1))>=48&&double(tline(1))<=57       % 判断首字符是否是数值
+                         fprintf(fidout,'%s\n',tline);                  % 如果是数字行，把此行数据写入文件MKMATLAB.txt
+                         continue                                         % 如果是非数字继续下一次循环
+                     end
+                 end
+             end
+             fclose(fidout);
+             MK=importdata('result.txt');
+             MP{1,i}(:,6)=MK(:,1);
+             MP{1,i}(:,2)=MK(:,2);
+             waitbar(i/fileindex);
+         end
  end
- end
+   try 
+    fclose('all')
+    delete('result.txt')
+  end
  close(t1);
  
 for i=1:length(filename)
@@ -676,6 +713,16 @@ end
 function edit7_Callback(hObject, eventdata, handles)
 
 function edit7_CreateFcn(hObject, eventdata, handles)
+
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in popupmenu3.
+function popupmenu3_Callback(hObject, eventdata, handles)
+
+function popupmenu3_CreateFcn(hObject, eventdata, handles)
 
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
