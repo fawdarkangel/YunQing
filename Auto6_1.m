@@ -36,7 +36,7 @@ Fahrzeugcode{i,1}=b.Fahrzeugcode{i,2};
 end
 
 set(handles.Fahrzeugcode,'String',Fahrzeugcode);
-Cover = imread('PHOTO.PNG');
+Cover = imread('PHOTO.JPG');
 axes(handles.axes1);
 imshow(Cover);
 axis off

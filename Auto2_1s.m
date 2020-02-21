@@ -180,6 +180,9 @@ for i=1:3
  xlabel('Weg(mm)','FontSize',zihao1);ylabel('Kraft(N)','FontSize',zihao1); 
   title(TITLE_NAME30{n},'FontSize',zihao);
   axis([0 max(MP{1,n}(:,1)*1.1) 0 max(MP{1,n}(:,2))*1.1]);
+    y_val=get(gca,'YTick');   %为了获得y轴句柄
+y_str=num2str(y_val');    %为了将数字转换为字符数组
+set(gca,'YTickLabel',y_str);    %显示
     sfilename1=[Fileadress,num2str(n),'-',TITLE_NAME30{n},'.jpg'];
 saveas(h,sfilename1);
 close(h)
@@ -259,8 +262,8 @@ waitbar(0.5);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%H35 V-35%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if get(handles.checkbox2,'Value')==1
-       TITLE_NAME_DEFINE2={'1#Zug H35°V-35° %50Fzleer EG+100kg';'2#Zug H35°V-35° %50Fzleer EG+100kg';'3#Zug H35°V-35° %50Fzleer EG+100kg';...
-           '1#Zug H35°V-35° %75Fzleer EG+100kg';'2#Zug H35°V-35° %75Fzleer EG+100kg';'3#Zug H35°V-35° %75Fzleer EG+100kg';};
+       TITLE_NAME_DEFINE2={'1#Zug H35°V-35° 50%Fzleer EG+100kg';'2#Zug H35°V-35° 50%Fzleer EG+100kg';'3#Zug H35°V-35° 50%Fzleer EG+100kg';...
+           '1#Zug H35°V-35° 75%Fzleer EG+100kg';'2#Zug H35°V-35° 75%Fzleer EG+100kg';'3#Zug H35°V-35° 75%Fzleer EG+100kg';};
        FIGURE_INDEX=37;
        DATA_INDEX=length(erster_unterlast)+1;
        myplot(MP,TITLE_NAME_DEFINE2,FIGURE_INDEX,DATA_INDEX)

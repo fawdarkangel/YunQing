@@ -5,15 +5,15 @@ MP_DIFF=diff(MP(:,2));
 [MAX1_pks,MAX1_locs]=findpeaks(MP_DIFF,'minpeakdistance',length(MP_DIFF)/10);
 X1=MAX1_locs(1);
 Index2=find(MP_DIFF(X1:end)<0.1,1); %第一个小于0.1的值为F1坐标
-X2=X1+Index2-1;  %F2坐标真实值
+X2=X1+Index2-1;  %F1坐标真实值
 
-Index3=find(MP_DIFF(X2:end)>0.3,1); %第一个大于0.1的值为F2坐标
+Index3=find(MP_DIFF(X2:end)>0.5,1); %第一个大于0.1的值为F2坐标
 X3=X2+Index3-1;  %F2坐标真实值
 
 [MAXlast_pks,MAXlast_locs]=findpeaks(-MP_DIFF,'minpeakdistance',length(MP_DIFF)/10);
 Index4=MAXlast_locs(end);
-Index4_1=find(MP_DIFF(X2:Index4)<0.01,1,'last'); 
-X4=Index4_1-1;
+Index4_1=find(MP_DIFF(X2:Index4)>-0.1,1,'last'); 
+X4=X2+Index4_1-1;
 
 X5=find(MP(:,1)>1,1,'last');
 %求m
@@ -43,5 +43,5 @@ for i=1:length(WEG_COL)
 end
 H_Middle=H(find(WEG_COL(:,2)<X4,1)+10:X3-10,1);
 H_Final=max(H_Middle);
-H_Final_index=find(H(:,1)==H_Final);
+H_Final_index=find(H(:,1)==H_Final,1);
 end

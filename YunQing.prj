@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="3372897359" file="C:\Users\wanghe\Desktop\Yunqing\YunQing_git\YunQing.prj" location="C:\Users\wanghe\Desktop\Yunqing\YunQing_git" name="YunQing" preferred-package-location="C:\Users\wanghe\Desktop\Yunqing\v1.26\YunQing\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="3372897359" file="C:\Users\wanghe\Desktop\Yunqing\YunQing_git\YunQing.prj" location="C:\Users\wanghe\Desktop\Yunqing\YunQing_git" name="YunQing" preferred-package-location="C:\Users\wanghe\Desktop\Yunqing\YunQing_git\YunQing\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>YunQing</param.appname>
     <param.icon>${PROJECT_ROOT}\YunQing_resources\icon.ico</param.icon>
     <param.icons>
@@ -8,7 +8,7 @@
       <file>${PROJECT_ROOT}\YunQing_resources\icon_24.png</file>
       <file>${PROJECT_ROOT}\YunQing_resources\icon_16.png</file>
     </param.icons>
-    <param.version>1.28</param.version>
+    <param.version>1.33</param.version>
     <param.authnamewatermark>HYT</param.authnamewatermark>
     <param.email>yuting.huang.te@faw-vw.com</param.email>
     <param.company>FAW-VW,CHINA</param.company>
@@ -95,6 +95,8 @@
       <file>${PROJECT_ROOT}\Auto3_1_3.m</file>
       <file>${PROJECT_ROOT}\Auto3_2_1.fig</file>
       <file>${PROJECT_ROOT}\Auto3_2_1.m</file>
+      <file>${PROJECT_ROOT}\Auto3_2_2.fig</file>
+      <file>${PROJECT_ROOT}\Auto3_2_2.m</file>
       <file>${PROJECT_ROOT}\Auto3_3_1.fig</file>
       <file>${PROJECT_ROOT}\Auto3_3_1.m</file>
       <file>${PROJECT_ROOT}\Auto4_1_1.fig</file>
@@ -149,7 +151,7 @@
       <file>${PROJECT_ROOT}\DVDcruve.JPG</file>
       <file>${PROJECT_ROOT}\login.fig</file>
       <file>${PROJECT_ROOT}\login.m</file>
-      <file>${PROJECT_ROOT}\PHOTO.PNG</file>
+      <file>${PROJECT_ROOT}\PHOTO.JPG</file>
       <file>${PROJECT_ROOT}\REPORTINFORMATION_OUTPUT.m</file>
       <file>${PROJECT_ROOT}\YunQing.fig</file>
       <file>${PROJECT_ROOT}\YunQing.m</file>

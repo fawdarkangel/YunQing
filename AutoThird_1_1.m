@@ -435,24 +435,27 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 handles=guihandles;
 guidata(hObject,handles);
 b1=get(handles.edit1,'String');
-b2=get(handles.edit2,'String');
-b3=get(handles.edit3,'String');
-b4=get(handles.edit4,'String');
+% b2=get(handles.edit2,'String');
+% b3=get(handles.edit3,'String');
+% b4=get(handles.edit4,'String');
    val1=get(handles.popupmenu1,'Value');
     val2=get(handles.popupmenu3,'Value');
-   switch val1
-       case 1
-           b3='1';b4='1';
-       case 2
-           b1='1';b2='1';
-   end
-if isempty(b1)||isempty(b2)||isempty(b3)||isempty(b4)
+%   switch val1
+%        case 1
+%            b3='1';b4='1';
+%        case 2
+%            b1='1';b2='1';
+%    end
+% if isempty(b1)||isempty(b2)||isempty(b3)||isempty(b4)
+if isempty(b1)
     msgbox('请输入堵转扭矩');
 return;
 
 else
-    T_VOR=(str2num(b1)+str2num(b2))/2*0.35;
-    T_HINTEN=(str2num(b3)+str2num(b4))/2*0.35;
+   % T_VOR=(str2num(b1)+str2num(b2))/2*0.35;
+    %T_HINTEN=(str2num(b3)+str2num(b4))/2*0.35;
+     T_VOR=str2num(b1);
+     T_HINTEN=str2num(b1);
 end
 
 [filename,pathname,fileindex]=uigetfile('*.xls;*.xlsx','选择数据','MultiSelect','on');
@@ -492,8 +495,9 @@ end
              this_filename=filename;
              fileindex=length(this_filename);
          else
-             fileindex=1;
+             fileindex=1;            
              this_filename{1}=filename;
+               filename=1;
          end
          for i=1:fileindex
              Filename{i}=strcat(pathname, this_filename{i});
@@ -503,11 +507,9 @@ end
                  tline=fgetl(fidin);                                     % 从文件读行
                  if isempty(tline)
                      continue
-                 else
-                     if double(tline(1))>=48&&double(tline(1))<=57       % 判断首字符是否是数值
+                 else                    
                          fprintf(fidout,'%s\n',tline);                  % 如果是数字行，把此行数据写入文件MKMATLAB.txt
-                         continue                                         % 如果是非数字继续下一次循环
-                     end
+                         continue                                        % 如果是非数字继续下一次循环                  
                  end
              end
              fclose(fidout);
@@ -524,7 +526,7 @@ end
  close(t1);
  
 for i=1:length(filename)
-    YMAX(i)=max(MP{1,i}(:,2));
+    YMAX(i)=max(abs(MP{1,i}(:,2)));
 end
 Y_MAX=max(YMAX);
 
@@ -550,8 +552,13 @@ Y_MAX=max(YMAX);
             end
    plot(T_VOR_CRUVE_X,T_VOR_CRUVE_Y1,'linewidth',2,'Color','r') ;  
        plot(T_VOR_CRUVE_X,T_VOR_CRUVE_Y2,'linewidth',2,'Color','r') ;  
-           
-          ylim([-Y_MAX*1.1 Y_MAX*1.1]);
+       plot(0,str2num(b1),'ro','MarkerFaceColor','r')
+        plot(0,-str2num(b1),'ro','MarkerFaceColor','r')
+        text(0,str2num(b1)*1.1,b1,'color','b');
+         text(0,-str2num(b1)*1.1,['-',b1],'color','b');
+        Y_labelmax= max([Y_MAX,T_VOR_CRUVE_Y1]) ; 
+          %ylim([-Y_MAX*1.1 Y_MAX*1.1]);
+          ylim([-Y_labelmax*1.1 Y_labelmax*1.1]);
           Y_TICK_MAX=ceil(Y_MAX);
           if mod(Y_TICK_MAX,2)==0
               Y_TICK_MAX=Y_TICK_MAX;

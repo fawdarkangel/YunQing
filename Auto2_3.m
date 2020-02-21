@@ -164,7 +164,28 @@ switch get(handles.popupmenu1,'value')
             end
         end
         set(handles.listbox1,'String',Sheet(1:end));
-    case 2                                                                             %高铁
+    case 2
+        [filename,pathname,fileindex]=uigetfile('*.xls;*.xlsx','选择数据','MultiSelect','on');
+        if isequal(filename,0)||isequal(pathname,0)||isequal(fileindex,0)
+           msgbox('导入文件失败');
+        return;
+      else
+          t1=waitbar(0,'正在读入数据');
+          for i=1:length(filename)
+              Filename{i}=strcat(pathname,filename{i});
+              [Type Sheet Format]=xlsfinfo(Filename{i}) ;
+              sheet{i}=Sheet;
+              MP_MITTLE{i}=xlsread(Filename{i},char(sheet{1,i}(1,4)));
+              MP{i}(:,1)=MP_MITTLE{i}(:,DATA_TYPE_WEG);
+              MP{i}(:,2)=MP_MITTLE{i}(:,DATA_TYPE_KRAFT);
+              waitbar(i/length(filename));
+              try
+                  system('taskkill/IM excel.exe');
+              end
+          end
+          set(handles.listbox1,'String',filename);
+        end
+    case 3                                                                             %高铁
         [filename,pathname,fileindex]=uigetfile('*.xls;*.xlsx;*.txt','选择数据','MultiSelect','on');
         if length(getappdata(0,'STAND_TITLE'))~=length(filename)
             msgbox('标题数量与数据数量不符，请检查数据或重新导入标题')
@@ -308,7 +329,12 @@ pathname=getappdata(0,'Auto2_3_pathname');
    filename=strcat(pathname,'result\');%合成保存图片路径Ｌ   
      file_usr=strcat(cd,'\model\Audi保险杠拉拔力.pptx');
  copy_usr=['copy ','"',file_usr,'"'] ;
-filespec_user=strcat(pathname,['result\',PROJECT,'.pptx']);
+%filespec_user=strcat(pathname,['result\',PROJECT,'.pptx']);
+%19.10.31修改，更改文件名，替换文件名中'/'字符串，防止保存文件时出错
+this_filename=strrep(PROJECT,'\','_');
+this_filename=strrep(this_filename,'/','_');
+filespec_user=strcat(pathname,['result\',this_filename,'.pptx']);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 copy_tal=['"',filespec_user,'"'];
 xyz=[copy_usr,' ',copy_tal];
 dos(xyz);

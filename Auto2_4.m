@@ -260,7 +260,7 @@ for i=1:length(MP)
     % delete(sfilename1);
     Selection.Start = Content.end;
     Selection.TypeParagraph;
-     headline=OUTFILENAME{i};
+     headline=[OUTFILENAME{i},'-Demontage拆卸'];
     Selection.Text=headline;
     Selection.Font.NameAscii='Arial';
     Selection.Font.Size=biaotihao; % 字体大小
@@ -400,7 +400,7 @@ for i=1:length(MP)
     % delete(sfilename1);
     Selection.Start = Content.end;
     Selection.TypeParagraph;
-     headline=OUTFILENAME{i};
+     headline=[OUTFILENAME{i},'-Montage安装'];
     Selection.Text=headline;
     Selection.Font.NameAscii='Arial';
     Selection.Font.Size=biaotihao; % 字体大小
