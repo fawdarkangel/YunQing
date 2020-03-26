@@ -249,7 +249,9 @@ end
     plot(MP{3*i-1}(:,2),MP{3*i-1}(:,1),'Color','r','linewidth',2);
     plot(MP{3*i}(:,2),MP{3*i}(:,1),'Color','g','linewidth',2);
     grid on;
+   % box on;
       set(gca,'FontSize',ZIHAO_TU_YULAN)
+      set(gca,'linewidth',2);
     xlabel('Weg/Î»ÒÆ[mm]','FontSize',ZIHAO_TU_YULAN)
     ylabel('Kraft/Á¦[N]','FontSize',ZIHAO_TU_YULAN)
     title(figuretitle{i},'FontSize',TITLEFONTSIZE)

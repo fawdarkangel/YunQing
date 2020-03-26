@@ -273,13 +273,13 @@ for i=1:length(MP)
 end
    
    
-   Document.ActiveWindow.ActivePane.View.Type = 'wdPrintView';
+Document.ActiveWindow.ActivePane.View.Type = 'wdPrintView';
 Document.Save; % 保存文档
    %%%%%%%%%%%%输出报告生成信息到公共空间%%%%%%%%%%%%%%%
 FAHRZEUGCODE_list=get(handles.Fahrzeugcode,'String');
 FAHRZEUGCODE_val=get(handles.Fahrzeugcode,'Value');
 FAHRZEUGCODE=FAHRZEUGCODE_list{FAHRZEUGCODE_val};
-TEST_NAME='导水槽拆卸力试验';
+TEST_NAME='Audi导水槽拆卸力试验';
 try
 REPORTINFORMATION_OUTPUT(FAHRZEUGCODE,TEST_NAME);
 end

@@ -417,7 +417,7 @@ run Auto7_3
 
 % --------------------------------------------------------------------
 function Menu2_4_Callback(hObject, eventdata, handles)
-run Auto2_4
+
 
 % --------------------------------------------------------------------
 function Menu5_2_Callback(hObject, eventdata, handles)
@@ -432,3 +432,13 @@ run AutoFourth_4
 % --------------------------------------------------------------------
 function Menu3_2_2_Callback(hObject, eventdata, handles)
 run Auto3_2_2
+
+
+% --------------------------------------------------------------------
+function Menu2_4_1_Callback(hObject, eventdata, handles)
+run Auto2_4
+
+
+% --------------------------------------------------------------------
+function Menu2_4_2_Callback(hObject, eventdata, handles)
+run Auto2_4_2
